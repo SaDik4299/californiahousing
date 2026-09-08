@@ -11,5 +11,7 @@ Create new enviornment
 
 ```
 conda create -p venv pyhton==3.7 -y
-
+conda activate venv/
 ```
+
+
