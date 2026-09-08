@@ -1,3 +1,165 @@
-<h1>
-    Hello world
-</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML API</title>
+    
+    <!-- Google Fonts integrated from your image -->
+    <link href='https://googleapis.com' rel='stylesheet' type='text/css'>
+    <link href='https://googleapis.com' rel='stylesheet' type='text/css'>
+    <link href='https://googleapis.com' rel='stylesheet' type='text/css'>
+    <link href='https://googleapis.com' rel='stylesheet' type='text/css'>
+
+    <style>
+        /* Setting up default typography using the fonts you imported */
+        body { 
+            font-family: 'Arimo', Arial, sans-serif; 
+            margin: 40px; 
+            background-color: #f4f4f9; 
+        }
+        h2 {
+            font-family: 'Arimo', Arial, sans-serif;
+            color: #333;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .form-container { 
+            max-width: 500px; 
+            margin: 0 auto;
+            background: white; 
+            padding: 25px; 
+            border-radius: 40px; 
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+        }
+        .input-group { 
+            margin-bottom: 15px; 
+        }
+        label { 
+            display: block; 
+            margin-bottom: 5px; 
+            font-family: 'Hind', sans-serif;
+            font-weight: bold; 
+            color: #555; 
+        }
+        input[type="text"] { 
+            width: 100%; 
+            padding: 8px; 
+            border: 1px solid #ccc; 
+            border-radius: 10px; 
+            box-sizing: border-box; 
+            font-family: 'Arimo', sans-serif;
+        }
+        button { 
+            background-color: #b0b3b6; 
+            color: white; 
+            padding: 12px 15px; 
+            border: none; 
+            border-radius: 18px; 
+            cursor: pointer; 
+            width: 100%; 
+            font-size: 16px; 
+            font-family: 'Open Sans Condensed', sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        button:hover { 
+            background-color: #5e5f61; 
+        }
+        .result-card {
+            max-width: 500px;
+            margin: 30px auto 0 auto;
+            background: #ebf8ff;
+            padding: 20px;
+            border-radius: 12px; 
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+         .result-title {
+            font-family: 'Hind', sans-serif;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #2b6cb0;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .result-value {
+            font-family: 'Arimo', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: #2c3e50;
+        }
+        .result-note {
+            font-size: 12px;
+            color: #718096;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>House Price Predictor</h2>
+    
+    <!-- Matches your Flask URL routing setup -->
+    <form action="{{ url_for('predict') }}" method="post">
+        
+        <div class="input-group">
+            <label for="MedInc">Median Income (in $100,000s):</label>
+            <input type="text" name="MedInc" placeholder="3.87" required="required" />
+        </div>
+
+        <div class="input-group">
+            <label for="HouseAge">Median House Age:</label>
+            <input type="text" name="HouseAge" placeholder="28.0" required="required" />
+        </div>
+
+        <div class="input-group">
+            <label for="AveRooms">Average Rooms per Household:</label>
+            <input type="text" name="AveRooms" placeholder="5.2" required="required" />
+        </div>
+
+        <div class="input-group">
+            <label for="AveBedrms">Average Bedrooms per Household:</label>
+            <input type="text" name="AveBedrms" placeholder="1.0" required="required" />
+        </div>
+
+        <div class="input-group">
+            <label for="Population">Block Group Population:</label>
+            <input type="text" name="Population" placeholder="1425.0" required="required" />
+        </div>
+
+        <div class="input-group">
+            <label for="AveOccup">Average House Occupancy:</label>
+            <input type="text" name="AveOccup" placeholder="3.0" required="required" />
+        </div>
+
+        <div class="input-group">
+            <label for="Latitude">Block Latitude:</label>
+            <input type="text" name="Latitude" placeholder="35.6" required="required" />
+        </div>
+
+        <div class="input-group">
+            <label for="Longitude">Block Longitude:</label>
+            <input type="text" name="Longitude" placeholder="-119.5" required="required" />
+        </div>
+
+        <button type="submit">Predict House Value</button>
+    </form>
+</div>
+{% if prediction_text %}
+<div class="result-card">
+    <div class="result-value">
+        {{ prediction_text }}
+    </div>
+</div>
+{% endif %}
+</body>
+</html>
